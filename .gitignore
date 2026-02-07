@@ -1,6 +1,9 @@
 # Wordpress - ignore core, configuration, examples, uploads and logs.
 # https://github.com/github/gitignore/blob/main/WordPress.gitignore
 
+# Environment files (contains sensitive credentials)
+.env
+
 # Core
 #
 # Note: if you want to stage/commit WP core files
@@ -20,11 +23,16 @@
 # Configuration
 wp-config.php
 
-# Example themes
+# Example themes (WordPress bundled)
 /wp-content/themes/twenty*/
 
 # Example plugin
 /wp-content/plugins/hello.php
+
+# Third-party plugins (install via WordPress admin or composer)
+/wp-content/plugins/advanced-custom-fields/
+/wp-content/plugins/advanced-custom-fields-pro/
+/wp-content/plugins/akismet/
 
 # Uploads
 /wp-content/uploads/
@@ -35,14 +43,14 @@ wp-config.php
 # htaccess
 /.htaccess
 
-# All plugins
-#
-# Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
+# macOS
+.DS_Store
 
-# All themes
-#
-# Note: If you wish to whitelist themes,
-# uncomment the next line
-#/wp-content/themes
+# All plugins - uncomment to ignore ALL plugins
+#/wp-content/plugins/*
+#!/wp-content/plugins/.gitkeep
+
+# All themes - uncomment to ignore ALL themes except custom
+#/wp-content/themes/*
+#!/wp-content/themes/.gitkeep
+#!/wp-content/themes/hookedonaneedle/

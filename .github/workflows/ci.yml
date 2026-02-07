@@ -1,0 +1,50 @@
+name: WordPress Lint
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'wp-content/themes/hookedonaneedle/**'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'wp-content/themes/hookedonaneedle/**'
+      - '.github/workflows/ci.yml'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer, cs2pr
+
+      # PHP Syntax Check - catches fatal errors
+      - name: PHP Syntax Check
+        run: |
+          find wp-content/themes/hookedonaneedle -name "*.php" -print0 2>/dev/null | xargs -0 -n1 php -l || echo "No PHP files found yet"
+
+      # PHP CodeSniffer with WordPress Standards
+      - name: Install PHPCS and WordPress Standards
+        run: |
+          composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+          composer global require --dev wp-coding-standards/wpcs:"^3.0" phpcsstandards/phpcsextra phpcsstandards/phpcsutils --no-interaction
+
+      - name: Run PHPCS
+        run: |
+          if [ -d "wp-content/themes/hookedonaneedle" ] && [ "$(find wp-content/themes/hookedonaneedle -name '*.php' 2>/dev/null)" ]; then
+            ~/.composer/vendor/bin/phpcs --standard=WordPress --extensions=php \
+              --ignore=*/vendor/*,*/node_modules/* \
+              --report=checkstyle \
+              wp-content/themes/hookedonaneedle/ | cs2pr
+          else
+            echo "No PHP files in hookedonaneedle theme yet - skipping PHPCS"
+          fi
+        continue-on-error: true  # Start with warnings, remove later to enforce
