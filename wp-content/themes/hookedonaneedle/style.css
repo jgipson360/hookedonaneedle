@@ -74,8 +74,8 @@ input:focus {
     }
 }
 
-/* Hidden class for JavaScript */
-.hidden {
+/* JS-controlled hidden state (use .js-hidden instead of .hidden to avoid Tailwind conflict) */
+.js-hidden {
     display: none !important;
 }
 
