@@ -160,6 +160,7 @@ function hooan_get_tailwind_config() {
                         secondary: '#EACAC6',
                         'background-light': '#FDF6F5',
                         'background-dark': '#1A1616',
+                        'accent-dark': '#1A2332',
                     },
                     fontFamily: {
                         display: ['Playfair Display', 'serif'],
@@ -247,6 +248,40 @@ if (file_exists(HOOAN_THEME_DIR . '/inc/acf-fields.php')) {
 // Include waitlist handler
 if (file_exists(HOOAN_THEME_DIR . '/inc/waitlist-handler.php')) {
     require_once HOOAN_THEME_DIR . '/inc/waitlist-handler.php';
+}
+
+/**
+ * Enqueue TikTok Embed SDK on Social page
+ *
+ * Conditionally loads the TikTok embed script only on the Social page template.
+ */
+function hooan_enqueue_tiktok_embed() {
+    if (is_page_template('page-social.php')) {
+        wp_enqueue_script(
+            'tiktok-embed',
+            'https://www.tiktok.com/embed.js',
+            array(),
+            null,
+            true
+        );
+        // Add async attribute
+        add_filter('script_loader_tag', 'hooan_add_async_tiktok_script', 10, 2);
+    }
+}
+add_action('wp_enqueue_scripts', 'hooan_enqueue_tiktok_embed');
+
+/**
+ * Add async attribute to TikTok embed script
+ *
+ * @param string $tag The script tag.
+ * @param string $handle The script handle.
+ * @return string Modified script tag.
+ */
+function hooan_add_async_tiktok_script($tag, $handle) {
+    if ('tiktok-embed' === $handle) {
+        return str_replace(' src', ' async src', $tag);
+    }
+    return $tag;
 }
 
 // Include waitlist admin
@@ -407,7 +442,7 @@ add_action('wp_ajax_nopriv_submit_waitlist', 'hooan_ajax_submit_waitlist');
  */
 class HOOAN_Nav_Walker extends Walker_Nav_Menu {
     public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
-        $classes = 'hover:text-primary transition-colors';
+        $classes = 'text-slate-600 dark:text-slate-300 hover:text-primary transition-colors';
 
         // Check if current item
         if (in_array('current-menu-item', $item->classes)) {
@@ -461,10 +496,10 @@ class HOOAN_Nav_Walker_Mobile extends Walker_Nav_Menu {
  */
 function hooan_fallback_menu() {
     ?>
-    <a href="<?php echo esc_url(home_url('/shop')); ?>" class="hover:text-primary transition-colors">Shop</a>
-    <a href="<?php echo esc_url(home_url('/custom-orders')); ?>" class="hover:text-primary transition-colors">Custom Orders</a>
-    <a href="<?php echo esc_url(home_url('/learn')); ?>" class="hover:text-primary transition-colors">Learn</a>
-    <a href="<?php echo esc_url(home_url('/about')); ?>" class="hover:text-primary transition-colors">About</a>
+    <a href="<?php echo esc_url(home_url('/shop')); ?>" class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">Shop</a>
+    <a href="<?php echo esc_url(home_url('/custom-orders')); ?>" class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">Custom Orders</a>
+    <a href="<?php echo esc_url(home_url('/learn')); ?>" class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">Learn</a>
+    <a href="<?php echo esc_url(home_url('/about')); ?>" class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">About</a>
     <?php
 }
 
