@@ -4,6 +4,9 @@
 # Environment files (contains sensitive credentials)
 .env
 
+# Composer dependencies
+/vendor/
+
 # Core
 #
 # Note: if you want to stage/commit WP core files
