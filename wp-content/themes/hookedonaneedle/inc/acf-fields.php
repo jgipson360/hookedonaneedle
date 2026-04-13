@@ -786,3 +786,313 @@ function hooan_get_field($field_name, $post_id = false) {
 
     return $value;
 }
+
+/**
+ * Register ACF field group for WooCommerce Product Details
+ */
+function hooan_register_product_acf_fields() {
+    if (!function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    acf_add_local_field_group(array(
+        'key' => 'group_product_details',
+        'title' => 'Product Details',
+        'fields' => array(
+            array(
+                'key' => 'field_product_fiber_type',
+                'label' => 'Fiber / Yarn Type',
+                'name' => 'fiber_yarn_type',
+                'type' => 'text',
+                'instructions' => 'Yarn or fiber composition (e.g., "100% Organic Cotton")',
+                'placeholder' => 'Enter fiber/yarn type',
+            ),
+            array(
+                'key' => 'field_product_care_instructions',
+                'label' => 'Care Instructions',
+                'name' => 'care_instructions',
+                'type' => 'textarea',
+                'instructions' => 'Washing and maintenance guidance',
+                'rows' => 3,
+                'placeholder' => 'e.g., Hand wash cold, lay flat to dry',
+            ),
+            array(
+                'key' => 'field_product_difficulty_level',
+                'label' => 'Difficulty Level',
+                'name' => 'difficulty_level',
+                'type' => 'select',
+                'instructions' => 'Crochet difficulty level of the pattern/product',
+                'choices' => array(
+                    'beginner'     => 'Beginner',
+                    'intermediate' => 'Intermediate',
+                    'advanced'     => 'Advanced',
+                ),
+                'default_value' => 'beginner',
+                'allow_null' => 1,
+                'return_format' => 'label',
+            ),
+            array(
+                'key' => 'field_product_made_to_order',
+                'label' => 'Made to Order',
+                'name' => 'made_to_order',
+                'type' => 'true_false',
+                'instructions' => 'Enable if this product is made after purchase (not from existing stock)',
+                'default_value' => 0,
+                'ui' => 1,
+            ),
+            array(
+                'key' => 'field_product_turnaround_time',
+                'label' => 'Estimated Turnaround Time',
+                'name' => 'turnaround_time',
+                'type' => 'text',
+                'instructions' => 'Production time estimate (e.g., "2-3 weeks")',
+                'placeholder' => 'e.g., 2-3 weeks',
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_product_made_to_order',
+                            'operator' => '==',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
+            ),
+            array(
+                'key' => 'field_product_badge',
+                'label' => 'Product Badge',
+                'name' => 'product_badge',
+                'type' => 'select',
+                'instructions' => 'Optional badge overlay on the product card image',
+                'choices' => array(
+                    'none'         => 'None',
+                    'limited_drop' => 'Limited Drop',
+                    'one_of_one'   => 'One of One',
+                ),
+                'default_value' => 'none',
+                'allow_null' => 0,
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'product',
+                ),
+            ),
+        ),
+        'menu_order' => 2,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'active' => true,
+    ));
+}
+add_action('acf/init', 'hooan_register_product_acf_fields');
+
+/**
+ * Register Custom Orders ACF field group.
+ */
+function hooan_register_custom_orders_acf_fields() {
+    if (!function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    acf_add_local_field_group(array(
+        'key' => 'group_custom_orders_content',
+        'title' => 'Custom Orders Content',
+        'fields' => array(
+            // =====================
+            // HERO SECTION TAB
+            // =====================
+            array(
+                'key' => 'field_co_hero_tab',
+                'label' => 'Hero Section',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_co_hero_label',
+                'label' => 'Label',
+                'name' => 'co_hero_label',
+                'type' => 'text',
+                'instructions' => 'Small label above the headline.',
+                'default_value' => 'Made to Order',
+            ),
+            array(
+                'key' => 'field_co_hero_heading',
+                'label' => 'Heading',
+                'name' => 'co_hero_heading',
+                'type' => 'textarea',
+                'instructions' => 'Supports HTML (&lt;br&gt;, &lt;em&gt;).',
+                'default_value' => 'Something made<br><em>just for you.</em>',
+                'rows' => 3,
+            ),
+            array(
+                'key' => 'field_co_hero_desc',
+                'label' => 'Description',
+                'name' => 'co_hero_desc',
+                'type' => 'textarea',
+                'default_value' => "Tell us what you have in mind and we'll bring it to life, stitch by stitch. Most commissions ship within 4 to 6 weeks.",
+                'rows' => 3,
+            ),
+
+            // =====================
+            // PROCESS STEPS TAB
+            // =====================
+            array(
+                'key' => 'field_co_process_tab',
+                'label' => 'Process Steps',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_co_process_steps',
+                'label' => 'Steps',
+                'name' => 'co_process_steps',
+                'type' => 'repeater',
+                'instructions' => 'The commission process steps displayed on the page.',
+                'min' => 0,
+                'max' => 10,
+                'layout' => 'table',
+                'button_label' => 'Add Step',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_co_step_num',
+                        'label' => 'Number',
+                        'name' => 'num',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '15'),
+                    ),
+                    array(
+                        'key' => 'field_co_step_title',
+                        'label' => 'Title',
+                        'name' => 'title',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '25'),
+                    ),
+                    array(
+                        'key' => 'field_co_step_desc',
+                        'label' => 'Description',
+                        'name' => 'desc',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '60'),
+                    ),
+                ),
+            ),
+
+            // =====================
+            // FORM OPTIONS TAB
+            // =====================
+            array(
+                'key' => 'field_co_form_tab',
+                'label' => 'Form Options',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_co_form_categories',
+                'label' => 'Categories',
+                'name' => 'co_form_categories',
+                'type' => 'textarea',
+                'instructions' => 'One category per line.',
+                'default_value' => "Blanket or Throw\nCardigan or Sweater\nHat or Beanie\nBaby Items\nHome Decor\nPlushie or Novelty\nTote or Bag\nSomething else",
+                'rows' => 8,
+            ),
+            array(
+                'key' => 'field_co_form_colors',
+                'label' => 'Color Swatches',
+                'name' => 'co_form_colors',
+                'type' => 'repeater',
+                'instructions' => 'Colors shown as swatches in the form.',
+                'min' => 0,
+                'max' => 20,
+                'layout' => 'table',
+                'button_label' => 'Add Color',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_co_color_name',
+                        'label' => 'Name',
+                        'name' => 'name',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '50'),
+                    ),
+                    array(
+                        'key' => 'field_co_color_hex',
+                        'label' => 'Hex',
+                        'name' => 'hex',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '50'),
+                    ),
+                ),
+            ),
+            array(
+                'key' => 'field_co_form_materials',
+                'label' => 'Materials',
+                'name' => 'co_form_materials',
+                'type' => 'textarea',
+                'instructions' => 'One material per line.',
+                'default_value' => "Wool\nCotton\nAcrylic\nAlpaca\nOrganic / Natural\nNo preference",
+                'rows' => 6,
+            ),
+
+            // =====================
+            // TRUST BAR TAB
+            // =====================
+            array(
+                'key' => 'field_co_trust_tab',
+                'label' => 'Trust Bar',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_co_trust_items',
+                'label' => 'Trust Items',
+                'name' => 'co_trust_items',
+                'type' => 'repeater',
+                'instructions' => 'Trust signals displayed at the bottom of the page.',
+                'min' => 0,
+                'max' => 6,
+                'layout' => 'table',
+                'button_label' => 'Add Item',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_co_trust_value',
+                        'label' => 'Value',
+                        'name' => 'value',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '50'),
+                    ),
+                    array(
+                        'key' => 'field_co_trust_label',
+                        'label' => 'Label',
+                        'name' => 'label',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '50'),
+                    ),
+                ),
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'page-custom-orders.php',
+                ),
+            ),
+        ),
+        'menu_order' => 2,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'active' => true,
+    ));
+}
+add_action('acf/init', 'hooan_register_custom_orders_acf_fields');
