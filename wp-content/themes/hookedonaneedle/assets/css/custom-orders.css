@@ -1,0 +1,835 @@
+/**
+ * Custom Orders Page Stylesheet
+ *
+ * Styles the Custom Orders page sections and overrides Gravity Forms
+ * defaults to match the theme's design system.
+ *
+ * Colors: primary #8B4A4E, background-light #FDF6F5, secondary #EACAC6,
+ *         background-dark #1A1616, accent-dark #1A2332
+ * Fonts:  Playfair Display (display), Quicksand (body/sans)
+ */
+
+/* ==========================================================================
+   1. Hero Section
+   ========================================================================== */
+
+.custom-orders-hero {
+    padding: 80px 24px 64px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.custom-orders-hero__label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #b89f81;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.custom-orders-hero__heading {
+    font-size: clamp(48px, 7vw, 80px);
+    line-height: 1.05;
+    font-weight: 400;
+    color: #2d2d2d;
+    margin-bottom: 24px;
+}
+
+.custom-orders-hero__heading em {
+    color: #8B4A4E;
+    font-style: italic;
+}
+
+.custom-orders-hero__desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #777;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   2. Process Strip
+   ========================================================================== */
+
+.custom-orders-process {
+    padding: 0 24px 72px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.custom-orders-process__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid #EACAC6;
+    border-bottom: 1px solid #EACAC6;
+    padding: 32px 0;
+}
+
+.custom-orders-process__col {
+    text-align: center;
+    padding: 0 16px;
+}
+
+.custom-orders-process__col--bordered {
+    border-right: 1px solid #EACAC6;
+}
+
+.custom-orders-process__num {
+    font-size: 32px;
+    color: #8B4A4E;
+    margin-bottom: 6px;
+    font-style: italic;
+}
+
+.custom-orders-process__title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.custom-orders-process__desc {
+    font-size: 11px;
+    color: #999;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   3. Form Section (wrapper around Gravity Forms)
+   ========================================================================== */
+
+.custom-orders-form-section {
+    padding: 0 24px 100px;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.form-section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #b89f81;
+    font-weight: 500;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.form-section-heading {
+    font-size: 36px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+/* ==========================================================================
+   4. Step Pills
+   ========================================================================== */
+
+.co-step-pills {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.custom-orders-form-section .co-step-pill,
+.custom-orders-form-section button.co-step-pill[type="button"] {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px !important;
+    border-radius: 9999px !important;
+    border: 1px solid #EACAC6 !important;
+    color: #8a6a4a !important;
+    background: #FDF6F5 !important;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Quicksand', sans-serif;
+    line-height: 1.5;
+    appearance: none;
+}
+
+.custom-orders-form-section .co-step-pill:hover {
+    background: #f5ede0 !important;
+}
+
+.custom-orders-form-section .co-step-pill.active,
+.custom-orders-form-section button.co-step-pill.active[type="button"] {
+    background: #8B4A4E !important;
+    border-color: #8B4A4E !important;
+    color: white !important;
+}
+
+.custom-orders-form-section .co-step-pill.active:hover {
+    background: #8B4A4E !important;
+}
+
+/* ==========================================================================
+   5. Progress Bar
+   ========================================================================== */
+
+.co-progress-bar {
+    height: 2px;
+    background: #EACAC6;
+    border-radius: 2px;
+    margin-bottom: 32px;
+    overflow: hidden;
+}
+
+.co-progress-fill {
+    height: 100%;
+    background: #8B4A4E;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+/* ==========================================================================
+   6. Step Panels
+   ========================================================================== */
+
+.custom-orders-form-section .co-step-panel {
+    display: none !important;
+}
+
+.custom-orders-form-section .co-step-panel.active {
+    display: block !important;
+}
+
+.co-step-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ==========================================================================
+   7. Form Fields
+   ========================================================================== */
+
+.co-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.co-form-field label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8a6a4a;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.co-label-optional {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #bbb;
+    font-size: 11px;
+}
+
+.co-field-hint {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.custom-orders-form-section .co-form-field input[type="text"],
+.custom-orders-form-section .co-form-field input[type="email"],
+.custom-orders-form-section .co-form-field input[type="url"],
+.custom-orders-form-section .co-form-field textarea,
+.custom-orders-form-section .co-form-field select {
+    background: #FDF6F5;
+    border: 1px solid #EACAC6;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-family: 'Quicksand', sans-serif;
+    color: #2d2d2d;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+    appearance: none;
+    box-shadow: none;
+}
+
+.co-form-field textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.custom-orders-form-section .co-form-field input[type="text"]:focus,
+.custom-orders-form-section .co-form-field input[type="email"]:focus,
+.custom-orders-form-section .co-form-field input[type="url"]:focus,
+.custom-orders-form-section .co-form-field textarea:focus,
+.custom-orders-form-section .co-form-field select:focus {
+    border-color: #8B4A4E;
+    box-shadow: 0 0 0 3px rgba(139, 74, 78, 0.08);
+    outline: none;
+}
+
+/* ==========================================================================
+   8. Name Grid (two-column)
+   ========================================================================== */
+
+.co-name-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 640px) {
+    .co-name-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ==========================================================================
+   9. Color Swatches
+   ========================================================================== */
+
+.co-swatches {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.co-swatch {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.25s cubic-bezier(.4,0,.2,1), border-color 0.2s ease;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.co-swatch input[type="checkbox"] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    appearance: none !important;
+}
+
+.co-swatch:hover {
+    transform: scale(1.15);
+}
+
+.co-swatch.selected {
+    border-color: #8B4A4E;
+    transform: scale(1.2);
+    box-shadow: 0 0 0 2px rgba(139, 74, 78, 0.25);
+}
+
+/* ==========================================================================
+   10. Material Pills
+   ========================================================================== */
+
+.co-material-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.co-material-pill {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+}
+
+.co-material-pill input[type="checkbox"] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    appearance: none !important;
+}
+
+.co-material-pill span {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    border: 1px solid #EACAC6;
+    background: #FDF6F5;
+    font-size: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+    color: #5a4a3a;
+}
+
+.co-material-pill:hover span {
+    background: #f5ede0;
+    border-color: #d4b896;
+}
+
+.co-material-pill.selected span {
+    background: #8B4A4E;
+    border-color: #8B4A4E;
+    color: white;
+}
+
+/* ==========================================================================
+   11. File Upload Zone
+   ========================================================================== */
+
+.co-upload-zone {
+    border: 1.5px dashed #EACAC6;
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #FDF6F5;
+}
+
+.co-upload-zone:hover,
+.co-upload-zone.drag-over {
+    border-color: #8B4A4E;
+    background: #faf3ee;
+}
+
+.co-upload-zone__title {
+    font-size: 13px;
+    color: #8a6a4a;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.co-upload-zone__hint {
+    font-size: 11px;
+    color: #bbb;
+}
+
+/* ==========================================================================
+   12. Preview Grid
+   ========================================================================== */
+
+.co-preview-grid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.co-preview-thumb {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #EACAC6;
+    flex-shrink: 0;
+}
+
+.co-preview-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.co-preview-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 12px;
+    line-height: 1;
+    padding: 0;
+}
+
+/* ==========================================================================
+   13. Buttons
+   ========================================================================== */
+
+.custom-orders-form-section .co-submit-btn,
+.custom-orders-form-section button.co-submit-btn[type="button"],
+.custom-orders-form-section button.co-submit-btn[type="submit"] {
+    background: #8B4A4E !important;
+    color: white !important;
+    border: none !important;
+    padding: 14px 40px !important;
+    border-radius: 9999px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Quicksand', sans-serif;
+    line-height: 1;
+    appearance: none;
+    display: inline-block !important;
+}
+
+.custom-orders-form-section .co-submit-btn:hover {
+    background: #7a4040 !important;
+    transform: translateY(-1px);
+}
+
+.custom-orders-form-section .co-back-btn,
+.custom-orders-form-section button.co-back-btn[type="button"] {
+    background: transparent !important;
+    color: #8B4A4E !important;
+    border: 1px solid #EACAC6 !important;
+    padding: 14px 40px !important;
+    border-radius: 9999px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Quicksand', sans-serif;
+    line-height: 1;
+    appearance: none;
+    display: inline-block !important;
+}
+
+.custom-orders-form-section .co-back-btn:hover {
+    background: #FDF6F5 !important;
+}
+
+.co-btn-footer {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+/* ==========================================================================
+   14. Confirmation
+   ========================================================================== */
+
+.co-confirmation {
+    text-align: center;
+    padding: 64px 0;
+}
+
+.co-confirmation__heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    color: #8B4A4E;
+    font-style: italic;
+    margin-bottom: 16px;
+    font-weight: 400;
+}
+
+.co-confirmation__text {
+    font-size: 15px;
+    color: #777;
+    line-height: 1.8;
+    max-width: 380px;
+    margin: 0 auto 24px;
+}
+
+.co-confirmation__footnote {
+    font-size: 11px;
+    color: #bbb;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   15. Validation / Error States
+   ========================================================================== */
+
+.co-form-field--error input,
+.co-form-field--error textarea,
+.co-form-field--error select {
+    border-color: #c44 !important;
+}
+
+.co-field-error {
+    font-size: 12px;
+    color: #c44;
+    margin-top: 2px;
+    font-family: 'Quicksand', sans-serif;
+    min-height: 0;
+}
+
+/* ==========================================================================
+   16. Form Footnote
+   ========================================================================== */
+
+.co-form-footnote {
+    font-size: 11px;
+    color: #bbb;
+    text-align: center;
+    line-height: 1.7;
+    margin-top: 4px;
+}
+
+/* ==========================================================================
+   17. Trust Bar
+   ========================================================================== */
+
+.custom-orders-trust {
+    background: #f5ede0;
+    padding: 48px 24px;
+    border-top: 1px solid #EACAC6;
+    border-bottom: 1px solid #EACAC6;
+}
+
+.custom-orders-trust__grid {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    text-align: center;
+}
+
+.custom-orders-trust__value {
+    font-size: 28px;
+    color: #8B4A4E;
+    font-style: italic;
+    margin-bottom: 6px;
+}
+
+.custom-orders-trust__label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+}
+
+/* ==========================================================================
+   18. Dark Mode
+   ========================================================================== */
+
+/* Page background handled by theme's dark mode on body/html */
+
+/* Hero */
+.dark .custom-orders-hero__heading {
+    color: #e8e0d8;
+}
+
+.dark .custom-orders-hero__heading em {
+    color: #8B4A4E;
+}
+
+.dark .custom-orders-hero__desc {
+    color: #999;
+}
+
+/* Process strip */
+.dark .custom-orders-process__grid {
+    border-color: #2a2420;
+}
+
+.dark .custom-orders-process__col--bordered {
+    border-color: #2a2420;
+}
+
+.dark .custom-orders-process__title {
+    color: #e8e0d8;
+}
+
+.dark .custom-orders-process__desc {
+    color: #777;
+}
+
+/* Form section headings */
+.dark .form-section-heading {
+    color: #e8e0d8;
+}
+
+/* Form inputs */
+.dark .custom-orders-form-section .co-form-field input[type="text"],
+.dark .custom-orders-form-section .co-form-field input[type="email"],
+.dark .custom-orders-form-section .co-form-field input[type="url"],
+.dark .custom-orders-form-section .co-form-field textarea,
+.dark .custom-orders-form-section .co-form-field select {
+    background: #1e2430;
+    border-color: #2e3a4a;
+    color: #e8e0d8;
+}
+
+.dark .custom-orders-form-section .co-form-field input[type="text"]:focus,
+.dark .custom-orders-form-section .co-form-field input[type="email"]:focus,
+.dark .custom-orders-form-section .co-form-field input[type="url"]:focus,
+.dark .custom-orders-form-section .co-form-field textarea:focus,
+.dark .custom-orders-form-section .co-form-field select:focus {
+    border-color: #8B4A4E;
+    box-shadow: 0 0 0 3px rgba(139, 74, 78, 0.15);
+}
+
+/* Field labels */
+.dark .co-form-field label {
+    color: #c8b8a8;
+}
+
+/* Step pills */
+.dark .custom-orders-form-section .co-step-pill,
+.dark .custom-orders-form-section button.co-step-pill[type="button"] {
+    background: #1e2430 !important;
+    border-color: #3a2e28 !important;
+    color: #c8b8a8 !important;
+}
+
+.dark .custom-orders-form-section .co-step-pill:hover {
+    background: #2a2e3a !important;
+}
+
+.dark .custom-orders-form-section .co-step-pill.active,
+.dark .custom-orders-form-section button.co-step-pill.active[type="button"] {
+    background: #8B4A4E !important;
+    border-color: #8B4A4E !important;
+    color: white !important;
+}
+
+/* Progress bar */
+.dark .co-progress-bar {
+    background: #3a2e28;
+}
+
+/* Back button */
+.dark .custom-orders-form-section .co-back-btn,
+.dark .custom-orders-form-section button.co-back-btn[type="button"] {
+    border-color: #3a2e28 !important;
+    color: #c8b8a8 !important;
+}
+
+.dark .custom-orders-form-section .co-back-btn:hover {
+    background: #1e1a16 !important;
+}
+
+/* Upload zone */
+.dark .co-upload-zone {
+    background: #1e2430;
+    border-color: #3a2e28;
+}
+
+.dark .co-upload-zone:hover,
+.dark .co-upload-zone.drag-over {
+    background: #251e30;
+    border-color: #8B4A4E;
+}
+
+/* Material pills */
+.dark .co-material-pill span {
+    background: #1e2430;
+    border-color: #2e3a4a;
+    color: #c8b8a8;
+}
+
+.dark .co-material-pill:hover span {
+    background: #2a2e3a;
+    border-color: #3a2e28;
+}
+
+.dark .co-material-pill.selected span {
+    background: #8B4A4E;
+    border-color: #8B4A4E;
+    color: white;
+}
+
+/* Color swatches — selected border stays primary in dark */
+
+/* Confirmation */
+.dark .co-confirmation__text {
+    color: #999;
+}
+
+.dark .co-confirmation__footnote {
+    color: #666;
+}
+
+/* Validation in dark */
+.dark .co-form-field--error input,
+.dark .co-form-field--error textarea,
+.dark .co-form-field--error select {
+    border-color: #c44 !important;
+}
+
+/* Preview thumb border */
+.dark .co-preview-thumb {
+    border-color: #2e3a4a;
+}
+
+/* Form footnote */
+.dark .co-form-footnote {
+    color: #666;
+}
+
+/* Field hints */
+.dark .co-field-hint {
+    color: #777;
+}
+
+/* Trust bar */
+.dark .custom-orders-trust {
+    background: #1a1410;
+    border-color: #2a2420;
+}
+
+.dark .custom-orders-trust__label {
+    color: #777;
+}
+
+/* ==========================================================================
+   19. Responsive
+   ========================================================================== */
+
+@media (max-width: 639px) {
+    /* Process strip stacks vertically */
+    .custom-orders-process__grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .custom-orders-process__col--bordered {
+        border-right: none;
+        border-bottom: 1px solid #EACAC6;
+        padding-bottom: 24px;
+    }
+
+    .dark .custom-orders-process__col--bordered {
+        border-bottom-color: #2a2420;
+    }
+
+    /* Trust bar stacks vertically */
+    .custom-orders-trust__grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    /* Form section padding */
+    .custom-orders-form-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}

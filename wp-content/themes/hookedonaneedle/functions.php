@@ -59,6 +59,15 @@ function hooan_theme_setup() {
     // Add support for responsive embedded content
     add_theme_support('responsive-embeds');
 
+    // WooCommerce support
+    add_theme_support('woocommerce');
+    add_theme_support('wc-product-gallery-zoom');
+    add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-slider');
+
+    // Product card image size (4:5 ratio)
+    add_image_size('product-card', 600, 750, true);
+
     // Add support for custom logo
     add_theme_support('custom-logo', array(
         'height'      => 100,
@@ -141,6 +150,17 @@ function hooan_enqueue_assets() {
         HOOAN_VERSION,
         true
     );
+
+    // Enqueue shop script on WooCommerce pages
+    if (function_exists('is_shop') && (is_shop() || is_product_taxonomy())) {
+        wp_enqueue_script(
+            'hooan-shop',
+            HOOAN_THEME_URI . '/assets/js/shop.js',
+            array(),
+            HOOAN_VERSION,
+            true
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'hooan_enqueue_assets');
 
@@ -250,6 +270,11 @@ if (file_exists(HOOAN_THEME_DIR . '/inc/waitlist-handler.php')) {
     require_once HOOAN_THEME_DIR . '/inc/waitlist-handler.php';
 }
 
+// Include custom orders handler
+if (file_exists(HOOAN_THEME_DIR . '/inc/custom-orders.php')) {
+    require_once HOOAN_THEME_DIR . '/inc/custom-orders.php';
+}
+
 /**
  * Enqueue TikTok Embed SDK on Social page
  *
@@ -284,9 +309,44 @@ function hooan_add_async_tiktok_script($tag, $handle) {
     return $tag;
 }
 
+/**
+ * Enqueue Custom Orders page stylesheet
+ *
+ * Conditionally loads the custom-orders CSS only on the Custom Orders page template.
+ */
+function hooan_enqueue_custom_orders_assets() {
+    if (is_page_template('page-custom-orders.php')) {
+        wp_enqueue_style(
+            'hooan-custom-orders',
+            HOOAN_THEME_URI . '/assets/css/custom-orders.css',
+            array('hooan-style'),
+            HOOAN_VERSION
+        );
+
+        wp_enqueue_script(
+            'hooan-custom-orders-js',
+            HOOAN_THEME_URI . '/assets/js/custom-orders.js',
+            array(),
+            HOOAN_VERSION,
+            true
+        );
+
+        wp_localize_script('hooan-custom-orders-js', 'hookedOnANeedleCommission', array(
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('hooan_commission_nonce'),
+        ));
+    }
+}
+add_action('wp_enqueue_scripts', 'hooan_enqueue_custom_orders_assets');
+
 // Include waitlist admin
 if (file_exists(HOOAN_THEME_DIR . '/inc/waitlist-admin.php')) {
     require_once HOOAN_THEME_DIR . '/inc/waitlist-admin.php';
+}
+
+// Include WooCommerce setup
+if (file_exists(HOOAN_THEME_DIR . '/inc/woocommerce-setup.php')) {
+    require_once HOOAN_THEME_DIR . '/inc/woocommerce-setup.php';
 }
 
 /**
@@ -442,17 +502,19 @@ add_action('wp_ajax_nopriv_submit_waitlist', 'hooan_ajax_submit_waitlist');
  */
 class HOOAN_Nav_Walker extends Walker_Nav_Menu {
     public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
-        $classes = 'text-slate-600 dark:text-slate-300 hover:text-primary transition-colors';
+        $is_current = in_array('current-menu-item', $item->classes) || in_array('current_page_item', $item->classes);
 
-        // Check if current item
-        if (in_array('current-menu-item', $item->classes)) {
-            $classes .= ' text-primary';
+        if ($is_current) {
+            $classes = 'text-primary font-semibold transition-colors';
+        } else {
+            $classes = 'text-slate-600 dark:text-slate-300 hover:text-primary transition-colors';
         }
 
         $output .= sprintf(
-            '<a href="%s" class="%s">%s</a>',
+            '<a href="%s" class="%s"%s>%s</a>',
             esc_url($item->url),
             esc_attr($classes),
+            $is_current ? ' aria-current="page"' : '',
             esc_html($item->title)
         );
     }
@@ -469,17 +531,19 @@ class HOOAN_Nav_Walker extends Walker_Nav_Menu {
  */
 class HOOAN_Nav_Walker_Mobile extends Walker_Nav_Menu {
     public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
-        $classes = 'hover:text-primary transition-colors py-2';
+        $is_current = in_array('current-menu-item', $item->classes) || in_array('current_page_item', $item->classes);
 
-        // Check if current item
-        if (in_array('current-menu-item', $item->classes)) {
-            $classes .= ' text-primary';
+        if ($is_current) {
+            $classes = 'text-primary font-semibold transition-colors py-2';
+        } else {
+            $classes = 'hover:text-primary transition-colors py-2';
         }
 
         $output .= sprintf(
-            '<a href="%s" class="%s">%s</a>',
+            '<a href="%s" class="%s"%s>%s</a>',
             esc_url($item->url),
             esc_attr($classes),
+            $is_current ? ' aria-current="page"' : '',
             esc_html($item->title)
         );
     }

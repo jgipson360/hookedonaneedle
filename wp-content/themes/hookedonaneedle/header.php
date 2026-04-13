@@ -46,6 +46,9 @@
 
         <!-- Right Side Actions -->
         <div class="flex items-center gap-4">
+            <!-- WooCommerce Cart Badge -->
+            <?php do_action('hooan_header_cart'); ?>
+
             <!-- Theme Switcher -->
             <button
                 id="theme-toggle"
