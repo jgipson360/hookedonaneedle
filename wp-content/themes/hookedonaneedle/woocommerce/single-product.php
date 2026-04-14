@@ -15,6 +15,7 @@ get_header();
 
 <main class="pt-24 pb-16 bg-background-light dark:bg-background-dark min-h-screen">
     <div class="max-w-7xl mx-auto px-6">
+        <?php do_action('hooan_breadcrumbs'); ?>
         <?php while (have_posts()) : the_post(); ?>
             <?php global $product; ?>
 
@@ -79,6 +80,9 @@ get_header();
                             <p>Fiber Type: <span class="text-slate-700 dark:text-slate-300"><?php echo esc_html($fiber); ?></span></p>
                         <?php endif; ?>
                     </div>
+
+                    <!-- AI Product Facts -->
+                    <?php do_action('hooan_product_facts'); ?>
 
                     <!-- ACF Product Details -->
                     <?php get_template_part('template-parts/shop/product-details-section'); ?>

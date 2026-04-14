@@ -29,7 +29,7 @@ if (!$fiber_yarn && !$care && !$difficulty) {
 ?>
 
 <div class="border-t border-pink-100 dark:border-slate-700 pt-4 mt-4">
-    <h3 class="font-display text-lg font-semibold text-slate-800 dark:text-slate-100 mb-3">Product Details</h3>
+    <h2 class="font-display text-lg font-semibold text-slate-800 dark:text-slate-100 mb-3">Product Details</h2>
     <dl class="space-y-3 font-sans text-sm">
         <?php if ($fiber_yarn) : ?>
             <div class="flex gap-2">

@@ -165,6 +165,26 @@ function hooan_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'hooan_enqueue_assets');
 
 /**
+ * Enqueue Google Analytics (gtag.js)
+ */
+function hooan_enqueue_google_analytics() {
+    wp_enqueue_script(
+        'hooan-gtag',
+        'https://www.googletagmanager.com/gtag/js?id=G-DG8KD05S3S',
+        array(),
+        null,
+        false
+    );
+    wp_script_add_data('hooan-gtag', 'async', true);
+
+    wp_add_inline_script('hooan-gtag', "window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DG8KD05S3S');");
+}
+add_action('wp_enqueue_scripts', 'hooan_enqueue_google_analytics');
+
+/**
  * Get Tailwind CSS configuration
  *
  * @return string JavaScript configuration for Tailwind
@@ -294,6 +314,12 @@ if (file_exists(HOOAN_THEME_DIR . '/inc/waitlist-handler.php')) {
 // Include custom orders handler
 if (file_exists(HOOAN_THEME_DIR . '/inc/custom-orders.php')) {
     require_once HOOAN_THEME_DIR . '/inc/custom-orders.php';
+}
+
+// Include SEO & AIO module
+if (file_exists(HOOAN_THEME_DIR . '/inc/seo.php')) {
+    require_once HOOAN_THEME_DIR . '/inc/seo.php';
+    HOOAN_SEO::init();
 }
 
 /**

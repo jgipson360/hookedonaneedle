@@ -17,12 +17,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://lh3.googleusercontent.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
     <?php wp_head(); ?>
 </head>
 <body <?php body_class('bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 font-sans transition-colors duration-300'); ?>>
 <?php wp_body_open(); ?>
 
-<nav class="fixed w-full z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-pink-100 dark:border-slate-800">
+<header>
+<nav aria-label="Primary navigation" class="fixed w-full z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-pink-100 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <!-- Logo / Site Title -->
         <div class="flex items-center gap-2">
@@ -32,7 +34,7 @@
         </div>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-8 font-medium">
+        <nav aria-label="Desktop menu" class="hidden md:flex items-center gap-8 font-medium">
             <?php
             wp_nav_menu(array(
                 'theme_location' => 'primary',
@@ -80,7 +82,7 @@
 
     <!-- Mobile Navigation Menu -->
     <div id="mobile-menu" class="mobile-menu md:hidden fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-background-light dark:bg-background-dark z-40">
-        <nav class="flex flex-col items-center gap-6 py-8 font-medium text-lg">
+        <nav aria-label="Mobile menu" class="flex flex-col items-center gap-6 py-8 font-medium text-lg">
             <?php
             wp_nav_menu(array(
                 'theme_location' => 'primary',
@@ -99,6 +101,7 @@
         </nav>
     </div>
 </nav>
+</header>
 
 <script>
 // Mobile menu toggle
