@@ -1,0 +1,440 @@
+/**
+ * About Page Styles
+ *
+ * Page-specific styles for the About page template (page-about.php).
+ * Uses the theme's design system: Playfair Display (font-display) + Quicksand (font-sans),
+ * primary #8B4A4E, secondary #EACAC6, background-light #FDF6F5, background-dark #1A1616.
+ *
+ * @package HookedOnANeedle
+ * @since 1.0.0
+ */
+
+/* ═══════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════ */
+
+.about-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 88vh;
+}
+
+.about-hero__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 80px;
+}
+
+.about-hero__label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #b89f81;
+    margin-bottom: 20px;
+}
+
+.about-hero__heading {
+    font-size: clamp(44px, 5.5vw, 72px);
+    font-weight: 400;
+    line-height: 1.06;
+    color: #2d2d2d;
+    margin-bottom: 28px;
+}
+
+.about-hero__heading em {
+    color: #8B4A4E;
+    font-style: italic;
+    font-weight: 300;
+}
+
+.about-hero__divider {
+    width: 80px;
+    height: 1px;
+    background: #d4b896;
+    margin-bottom: 32px;
+}
+
+.about-hero__quote {
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 300;
+    color: #5a4a3a;
+    line-height: 1.65;
+    max-width: 420px;
+}
+
+.about-hero__image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 500px;
+}
+
+/* ═══════════════════════════════
+   STORY SECTION
+   ═══════════════════════════════ */
+
+.about-story {
+    padding: 100px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-story__opener {
+    font-size: clamp(30px, 3.5vw, 44px);
+    font-weight: 400;
+    line-height: 1.25;
+    color: #2d2d2d;
+    margin-bottom: 32px;
+}
+
+.about-story__opener em {
+    color: #8B4A4E;
+    font-style: italic;
+}
+
+.about-story__body {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #666;
+    margin-bottom: 48px;
+}
+
+.about-story__body strong {
+    color: #4a3a2a;
+    font-weight: 500;
+}
+
+.about-story__pullquote {
+    border-left: 2px solid #8B4A4E;
+    padding: 28px 40px;
+    margin: 56px 0 0;
+    background: #fdf7f0;
+}
+
+.about-story__pullquote p {
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 300;
+    color: #5a4a3a;
+    line-height: 1.7;
+}
+
+/* ═══════════════════════════════
+   VALUES SECTION
+   ═══════════════════════════════ */
+
+.about-values {
+    padding: 0 24px 100px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-values__label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #b89f81;
+    margin-bottom: 16px;
+}
+
+.about-values__intro {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 48px;
+}
+
+.about-values__grid {
+    border-top: 1px solid #eaddca;
+}
+
+.about-values__row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid #eaddca;
+    align-items: start;
+}
+
+.about-values__left {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-values__num {
+    font-size: 40px;
+    font-style: italic;
+    color: #d4b896;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.about-values__title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8B4A4E;
+}
+
+.about-values__heading {
+    font-size: 22px;
+    font-weight: 400;
+    color: #2d2d2d;
+    margin-bottom: 8px;
+}
+
+.about-values__body {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.75;
+    padding-top: 4px;
+}
+
+/* ═══════════════════════════════
+   MISSION SECTION
+   ═══════════════════════════════ */
+
+.about-mission {
+    padding: 80px 24px;
+    background: #f5ede0;
+    border-top: 1px solid #eaddca;
+    border-bottom: 1px solid #eaddca;
+    text-align: center;
+}
+
+.about-mission__quote {
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #2d2d2d;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.about-mission__quote em {
+    color: #8B4A4E;
+    font-style: italic;
+    font-weight: 300;
+}
+
+/* ═══════════════════════════════
+   SIGN-OFF SECTION
+   ═══════════════════════════════ */
+
+.about-sign {
+    padding: 100px 24px;
+    text-align: center;
+    background: #fdfaf6;
+}
+
+.about-sign__intro {
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 300;
+    color: #888;
+    line-height: 1.8;
+    max-width: 480px;
+    margin: 0 auto 40px;
+}
+
+.about-sign__close {
+    font-size: 18px;
+    font-weight: 300;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.about-sign__name {
+    font-style: italic;
+    font-size: 64px;
+    font-weight: 300;
+    color: #8B4A4E;
+    line-height: 1;
+    margin-bottom: 32px;
+}
+
+.about-sign__divider {
+    width: 80px;
+    height: 1px;
+    background: #eaddca;
+    margin: 0 auto 20px;
+}
+
+.about-sign__founder {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #b89f81;
+    font-weight: 500;
+}
+
+.about-sign__icons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 40px;
+    opacity: 0.15;
+}
+
+/* ═══════════════════════════════
+   DARK MODE
+   ═══════════════════════════════ */
+
+.dark .about-hero__heading {
+    color: #e2e8f0;
+}
+
+.dark .about-hero__heading em {
+    color: #EACAC6;
+}
+
+.dark .about-hero__label {
+    color: #9a8a72;
+}
+
+.dark .about-hero__quote {
+    color: #94a3b8;
+}
+
+.dark .about-hero__divider {
+    background: #5a4a3a;
+}
+
+.dark .about-story__opener {
+    color: #e2e8f0;
+}
+
+.dark .about-story__opener em {
+    color: #EACAC6;
+}
+
+.dark .about-story__body {
+    color: #94a3b8;
+}
+
+.dark .about-story__body strong {
+    color: #e2e8f0;
+}
+
+.dark .about-story__pullquote {
+    background: #1e1a14;
+    border-left-color: #8B4A4E;
+}
+
+.dark .about-story__pullquote p {
+    color: #94a3b8;
+}
+
+.dark .about-values__label {
+    color: #9a8a72;
+}
+
+.dark .about-values__intro {
+    color: #94a3b8;
+}
+
+.dark .about-values__grid {
+    border-top-color: #3a2e28;
+}
+
+.dark .about-values__row {
+    border-bottom-color: #3a2e28;
+}
+
+.dark .about-values__num {
+    color: #9a8a72;
+}
+
+.dark .about-values__title {
+    color: #EACAC6;
+}
+
+.dark .about-values__heading {
+    color: #e2e8f0;
+}
+
+.dark .about-values__body {
+    color: #94a3b8;
+}
+
+.dark .about-mission {
+    background: #1e1a14;
+    border-top-color: #3a2e28;
+    border-bottom-color: #3a2e28;
+}
+
+.dark .about-mission__quote {
+    color: #e2e8f0;
+}
+
+.dark .about-mission__quote em {
+    color: #EACAC6;
+}
+
+.dark .about-sign {
+    background: #1A1616;
+}
+
+.dark .about-sign__intro {
+    color: #64748b;
+}
+
+.dark .about-sign__close {
+    color: #94a3b8;
+}
+
+.dark .about-sign__name {
+    color: #EACAC6;
+}
+
+.dark .about-sign__divider {
+    background: #3a2e28;
+}
+
+.dark .about-sign__founder {
+    color: #9a8a72;
+}
+
+.dark .about-sign__icons {
+    opacity: 0.1;
+}
+
+/* ═══════════════════════════════
+   RESPONSIVE — MOBILE (< 768px)
+   ═══════════════════════════════ */
+
+@media (max-width: 767px) {
+    .about-hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .about-hero__text {
+        padding: 48px 24px;
+        order: 2;
+    }
+
+    .about-hero__image {
+        min-height: 60vw;
+        order: 1;
+    }
+
+    .about-values__row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .about-story__pullquote {
+        padding: 20px 24px;
+    }
+
+    .about-sign__name {
+        font-size: 48px;
+    }
+}
