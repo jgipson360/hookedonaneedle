@@ -413,6 +413,7 @@
     .about-hero {
         grid-template-columns: 1fr;
         min-height: auto;
+        padding-top: 80px; /* offset for fixed navbar (h-20) */
     }
 
     .about-hero__text {
