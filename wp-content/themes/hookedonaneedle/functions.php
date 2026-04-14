@@ -339,6 +339,23 @@ function hooan_enqueue_custom_orders_assets() {
 }
 add_action('wp_enqueue_scripts', 'hooan_enqueue_custom_orders_assets');
 
+/**
+ * Enqueue About page stylesheet
+ *
+ * Conditionally loads the about CSS only on the About page template.
+ */
+function hooan_enqueue_about_assets() {
+    if (is_page_template('page-about.php')) {
+        wp_enqueue_style(
+            'hooan-about',
+            HOOAN_THEME_URI . '/assets/css/about.css',
+            array('hooan-style'),
+            HOOAN_VERSION
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'hooan_enqueue_about_assets');
+
 // Include waitlist admin
 if (file_exists(HOOAN_THEME_DIR . '/inc/waitlist-admin.php')) {
     require_once HOOAN_THEME_DIR . '/inc/waitlist-admin.php';

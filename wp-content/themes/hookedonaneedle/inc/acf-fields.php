@@ -1096,3 +1096,237 @@ function hooan_register_custom_orders_acf_fields() {
     ));
 }
 add_action('acf/init', 'hooan_register_custom_orders_acf_fields');
+
+/**
+ * Register About Page ACF field group
+ */
+function hooan_register_about_page_acf_fields() {
+    if (!function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    acf_add_local_field_group(array(
+        'key' => 'group_about_page_content',
+        'title' => 'About Page Content',
+        'fields' => array(
+            // ── HERO SECTION TAB ──
+            array(
+                'key' => 'field_about_hero_tab',
+                'label' => 'Hero Section',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_about_hero_label',
+                'label' => 'Tagline Label',
+                'name' => 'about_hero_label',
+                'type' => 'text',
+                'instructions' => 'Short label above the headline (e.g., "The Hands & Heart")',
+                'default_value' => 'The Hands & Heart',
+            ),
+            array(
+                'key' => 'field_about_hero_heading',
+                'label' => 'Headline',
+                'name' => 'about_hero_heading',
+                'type' => 'textarea',
+                'instructions' => 'Main headline. Supports &lt;br&gt; for line breaks and &lt;em&gt; for italic/primary color.',
+                'default_value' => 'Hi, I\'m Jamila —<br/>The Heart Behind<br/><em>Hooked on a Needle</em>',
+                'rows' => 3,
+            ),
+            array(
+                'key' => 'field_about_hero_quote',
+                'label' => 'Pull Quote',
+                'name' => 'about_hero_quote',
+                'type' => 'textarea',
+                'instructions' => 'Italic quote displayed below the divider.',
+                'default_value' => '"I didn\'t just learn how to crochet… I was introduced to a rhythm. A rhythm of patience. Of creativity. Of healing."',
+                'rows' => 3,
+            ),
+            array(
+                'key' => 'field_about_hero_image',
+                'label' => 'Hero Image',
+                'name' => 'about_hero_image',
+                'type' => 'image',
+                'instructions' => 'Portrait photo of the founder. Falls back to the default if empty.',
+                'return_format' => 'array',
+                'preview_size' => 'medium',
+                'library' => 'all',
+            ),
+
+            // ── STORY SECTION TAB ──
+            array(
+                'key' => 'field_about_story_tab',
+                'label' => 'Story Section',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_about_story_opener',
+                'label' => 'Opener Paragraph',
+                'name' => 'about_story_opener',
+                'type' => 'textarea',
+                'instructions' => 'Opening statement. Supports &lt;em&gt; for italic/primary color emphasis.',
+                'default_value' => 'Hooked on a Needle was born from more than yarn — it was born from <em>purpose.</em>',
+                'rows' => 2,
+            ),
+            array(
+                'key' => 'field_about_story_body',
+                'label' => 'Body Text',
+                'name' => 'about_story_body',
+                'type' => 'textarea',
+                'instructions' => 'Main story body text. Supports &lt;strong&gt; for bold highlights.',
+                'default_value' => 'As a <strong>self-taught Fiber-Arts Engineer</strong>, my journey with yarn is rooted in the fusion of artistic expression and structural integrity. I don\'t just create accessories — I engineer pieces that balance <strong>texture, structure, durability, and design</strong>.',
+                'rows' => 4,
+            ),
+            array(
+                'key' => 'field_about_story_quote',
+                'label' => 'Pull Quote',
+                'name' => 'about_story_quote',
+                'type' => 'textarea',
+                'instructions' => 'Blockquote displayed with a left border accent.',
+                'default_value' => 'When you support Hooked on a Needle, you\'re not just buying a handmade item — you\'re investing in a legacy of craftsmanship and a commitment to a slow, intentional way of living.',
+                'rows' => 3,
+            ),
+
+            // ── VALUES TAB ──
+            array(
+                'key' => 'field_about_values_tab',
+                'label' => 'Values',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_about_values_label',
+                'label' => 'Section Label',
+                'name' => 'about_values_label',
+                'type' => 'text',
+                'default_value' => 'Beyond Craftsmanship',
+            ),
+            array(
+                'key' => 'field_about_values_intro',
+                'label' => 'Intro Text',
+                'name' => 'about_values_intro',
+                'type' => 'textarea',
+                'default_value' => 'My vision extends beyond hooks and needles. I am committed to fostering a community built on growth and empowerment.',
+                'rows' => 2,
+            ),
+            array(
+                'key' => 'field_about_values',
+                'label' => 'Values',
+                'name' => 'about_values',
+                'type' => 'repeater',
+                'instructions' => 'Core values displayed as numbered rows.',
+                'min' => 0,
+                'max' => 10,
+                'layout' => 'block',
+                'button_label' => 'Add Value',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_about_value_num',
+                        'label' => 'Number',
+                        'name' => 'num',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '15'),
+                    ),
+                    array(
+                        'key' => 'field_about_value_title',
+                        'label' => 'Title',
+                        'name' => 'title',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '20'),
+                    ),
+                    array(
+                        'key' => 'field_about_value_heading',
+                        'label' => 'Heading',
+                        'name' => 'heading',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '25'),
+                    ),
+                    array(
+                        'key' => 'field_about_value_body',
+                        'label' => 'Body',
+                        'name' => 'body',
+                        'type' => 'textarea',
+                        'rows' => 2,
+                        'wrapper' => array('width' => '40'),
+                    ),
+                ),
+            ),
+
+            // ── MISSION TAB ──
+            array(
+                'key' => 'field_about_mission_tab',
+                'label' => 'Mission',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_about_mission_quote',
+                'label' => 'Mission Quote',
+                'name' => 'about_mission_quote',
+                'type' => 'textarea',
+                'instructions' => 'Centered blockquote. Supports &lt;em&gt; for italic/primary color emphasis.',
+                'default_value' => '"My mission is simple: to <em>stitch warmth,</em> beauty, and purpose into everything I touch."',
+                'rows' => 2,
+            ),
+
+            // ── SIGN-OFF TAB ──
+            array(
+                'key' => 'field_about_sign_tab',
+                'label' => 'Sign-Off',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_about_sign_intro',
+                'label' => 'Intro Text',
+                'name' => 'about_sign_intro',
+                'type' => 'textarea',
+                'default_value' => 'Thank you for being here, for appreciating the art of the slow stitch, and for being part of this beautiful journey.',
+                'rows' => 2,
+            ),
+            array(
+                'key' => 'field_about_sign_close',
+                'label' => 'Closing Line',
+                'name' => 'about_sign_close',
+                'type' => 'text',
+                'default_value' => 'With love & loops,',
+            ),
+            array(
+                'key' => 'field_about_sign_name',
+                'label' => 'Signature Name',
+                'name' => 'about_sign_name',
+                'type' => 'text',
+                'default_value' => 'Jamila',
+            ),
+            array(
+                'key' => 'field_about_sign_founder',
+                'label' => 'Founder Title',
+                'name' => 'about_sign_founder',
+                'type' => 'text',
+                'default_value' => 'Founder, Hooked on a Needle LLC',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'page-about.php',
+                ),
+            ),
+        ),
+        'menu_order' => 3,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'active' => true,
+    ));
+}
+add_action('acf/init', 'hooan_register_about_page_acf_fields');
