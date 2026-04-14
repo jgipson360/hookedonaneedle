@@ -20,8 +20,8 @@ $hero_image = function_exists('get_field') ? get_field('hero_image') : null;
 // Debug: uncomment to see what's being returned
 echo '<!-- Hero Image Debug: ' . print_r($hero_image, true) . ' -->';
 
-// Default hero image URLs (from mock)
-$default_hero_image = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDHtmlbxMqncmOegPf_TlYkJTDv9msvc5_qxisJp2jiLWm9qZ9NBAwSm2NiSh6Cmh9FLdGcKXISjdzjOinrXW6k_kKeWBDmgxYjE60WsAVXROEoxYfOTRdxW-ebzFWjXIg7WQ51Aza8pI6rIK8GqcD5V23NYienfnEUSmKDaL9_WHmwxsN79kg_d8vi3Ff-pNRL4JayzcHlMWp6C6YBHNvNm3AmTmyzMBAih4PdbWfm6XJ31rj3C3Ghxev9YTkDHQh5eCmFwzO8gy8';
+// Default hero image
+$default_hero_image = get_template_directory_uri() . '/assets/images/featured_art.jpg';
 
 // Get image URL with proper fallback
 if ($hero_image && is_array($hero_image) && !empty($hero_image['url'])) {

@@ -46,6 +46,7 @@ class HOOAN_Waitlist_Handler {
 
         $sql = "CREATE TABLE IF NOT EXISTS {$this->table_name} (
             id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            name VARCHAR(255) NOT NULL DEFAULT '',
             email VARCHAR(255) NOT NULL,
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
@@ -113,13 +114,15 @@ class HOOAN_Waitlist_Handler {
      * Add a new email to the waitlist
      *
      * @param string $email Email address to add
+     * @param string $name  Subscriber name (optional)
      * @return array Result array with 'success' and 'message' keys
      */
-    public function add_email($email) {
+    public function add_email($email, $name = '') {
         global $wpdb;
 
-        // Sanitize email
+        // Sanitize inputs
         $email = $this->sanitize_email($email);
+        $name  = sanitize_text_field(trim($name));
 
         // Validate email format
         if (!$this->validate_email($email)) {
@@ -143,10 +146,11 @@ class HOOAN_Waitlist_Handler {
         $inserted = $wpdb->insert(
             $this->table_name,
             array(
+                'name'       => $name,
                 'email'      => $email,
                 'created_at' => current_time('mysql')
             ),
-            array('%s', '%s')
+            array('%s', '%s', '%s')
         );
 
         if ($inserted === false) {
@@ -158,7 +162,7 @@ class HOOAN_Waitlist_Handler {
         }
 
         // Fire action hook for successful submission
-        do_action('hooan_waitlist_submitted', $email, $wpdb->insert_id);
+        do_action('hooan_waitlist_submitted', $email, $wpdb->insert_id, $name);
 
         return array(
             'success' => true,
@@ -271,12 +275,13 @@ class HOOAN_Waitlist_Handler {
         fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
         // Add header row
-        fputcsv($output, array('ID', 'Email', 'Date Signed Up'));
+        fputcsv($output, array('ID', 'Name', 'Email', 'Date Signed Up'));
 
         // Add data rows
         foreach ($emails as $entry) {
             fputcsv($output, array(
                 $entry['id'],
+                isset($entry['name']) ? $entry['name'] : '',
                 $entry['email'],
                 $entry['created_at']
             ));

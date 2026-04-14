@@ -14,11 +14,11 @@ $section_subtitle = hooan_get_field('featured_section_subtitle');
 $lookbook_link = hooan_get_field('featured_lookbook_link');
 $featured_creations = hooan_get_field('featured_creations');
 
-// Default images from mock
+// Default images
 $default_images = array(
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuAyqY547zRsNoKoUL2wZ-NZz-zYLKgSRG4_nHlbRqKi-jlzDFfTaEDEBin1EXD9S1aSJgbX2Zfjtc63IJcwd6OrcjkMnA11LP2dXQlW36LnwB9r1QYd8VYTiGCSKRtF7yKudeMNQBx_BeWuV5Ib-Oc7z_M410o-od4IR81fPVZ7KsZtah7WxsWICIDrRGqN9i6nlFoxIIv7Wk9cwpA7uDTO2aOSn8ZWSvnarZI-d1AQ4cZfTWOP4Zj3_D_m8dEjbqxA8FyoUCWyQLQ',
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuCbqML0H8Vm8NWhmMPajYog7kJFi9tSr7nydGF1C_FjUGT8Kr1OCJ5_7XIhrtPbga3y8fusN28HkVfIl6_O6XQNYLjosY50ICjC88dx0uKPaxYF0840-I2a-wyNChW9fIk71xpuifA_J9KFZ5vym-sfG0YjKOoftET5Vr5B6mqWqtaL2O5Rzjevj690aaCo5RE3oX7-AZAqUl7wEiYXqHvFgROCzL4ux3bPtTvE9D-uwQ9vqDoWzFXCMJOcHMuPK3jozYA8niYpge4',
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuCaVkzk4tNKM19xLIgNlPVvR0HLpPouHoaPrE0GggExUxR1q_UZU2i8YShaUXKrYRLRT-ktl60LYkyNqeg3wwDd4ShK3mCnGsNnc_iHhylite0cfXLTOursZEpUa_Vda8PoIX5svGL3Yj9rCpaA8K9AwUHLn8c1w1qSbJ4DNC_GViwKh4YLNQLru9D9ag2U5kJsET6HB_Z1FtqOWPhlOV2fMLwBdfVZ3H6Z4j5i3BRdgUHxe5ST_enneQ5lxzFFjXkDVypzhkqJEvA',
+    get_template_directory_uri() . '/assets/images/featured_image1.png',
+    get_template_directory_uri() . '/assets/images/featured_image2.png',
+    get_template_directory_uri() . '/assets/images/featured_image3.png',
 );
 ?>
 

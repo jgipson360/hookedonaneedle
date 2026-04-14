@@ -58,13 +58,13 @@
                 <span class="material-icons-outlined">dark_mode</span>
             </button>
 
-            <!-- Join Waitlist Button (scrolls to form) -->
-            <a
-                href="#waitlist-form"
-                class="hidden sm:block bg-primary text-white px-6 py-2 rounded-full font-medium hover:opacity-90 transition-opacity"
+            <!-- Join Waitlist Button (opens modal) -->
+            <button
+                type="button"
+                class="waitlist-modal-trigger hidden sm:block bg-primary text-white px-6 py-2 rounded-full font-medium hover:opacity-90 transition-opacity"
             >
                 <?php _e('Join Waitlist', 'hookedonaneedle'); ?>
-            </a>
+            </button>
 
             <!-- Mobile Menu Toggle -->
             <button
@@ -90,12 +90,12 @@
                 'walker'         => new HOOAN_Nav_Walker_Mobile(),
             ));
             ?>
-            <a
-                href="#waitlist-form"
-                class="mt-4 bg-primary text-white px-8 py-3 rounded-full font-medium hover:opacity-90 transition-opacity"
+            <button
+                type="button"
+                class="waitlist-modal-trigger mt-4 bg-primary text-white px-8 py-3 rounded-full font-medium hover:opacity-90 transition-opacity"
             >
                 <?php _e('Join Waitlist', 'hookedonaneedle'); ?>
-            </a>
+            </button>
         </nav>
     </div>
 </nav>
