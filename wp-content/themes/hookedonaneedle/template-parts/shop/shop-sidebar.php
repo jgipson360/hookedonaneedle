@@ -22,9 +22,9 @@ $active_cat = hooan_get_active_product_cat();
 <div class="space-y-12">
     <!-- Categories Section -->
     <div>
-        <h3 class="font-display text-xs uppercase tracking-[0.2em] mb-8 border-b border-pink-100 dark:border-slate-700 pb-3 font-bold text-slate-800 dark:text-slate-200">
+        <h2 class="font-display text-xs uppercase tracking-[0.2em] mb-8 border-b border-pink-100 dark:border-slate-700 pb-3 font-bold text-slate-800 dark:text-slate-200">
             Categories
-        </h3>
+        </h2>
         <?php if ($categories && !is_wp_error($categories)) : ?>
             <ul class="space-y-5 text-sm font-sans">
                 <?php foreach ($categories as $cat) :
