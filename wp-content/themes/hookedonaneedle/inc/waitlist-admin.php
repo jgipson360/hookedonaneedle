@@ -217,6 +217,9 @@ class HOOAN_Waitlist_Admin {
                     <th scope="col" class="column-id" style="width: 60px;">
                         <?php _e('ID', 'hookedonaneedle'); ?>
                     </th>
+                    <th scope="col" class="column-name">
+                        <?php _e('Name', 'hookedonaneedle'); ?>
+                    </th>
                     <th scope="col" class="column-email">
                         <?php _e('Email', 'hookedonaneedle'); ?>
                     </th>
@@ -231,7 +234,7 @@ class HOOAN_Waitlist_Admin {
             <tbody>
                 <?php if (empty($entries)) : ?>
                     <tr>
-                        <td colspan="4">
+                        <td colspan="5">
                             <?php _e('No waitlist entries yet.', 'hookedonaneedle'); ?>
                         </td>
                     </tr>
@@ -240,6 +243,9 @@ class HOOAN_Waitlist_Admin {
                         <tr>
                             <td class="column-id">
                                 <?php echo esc_html($entry['id']); ?>
+                            </td>
+                            <td class="column-name">
+                                <?php echo esc_html(!empty($entry['name']) ? $entry['name'] : '—'); ?>
                             </td>
                             <td class="column-email">
                                 <a href="mailto:<?php echo esc_attr($entry['email']); ?>">
@@ -284,6 +290,9 @@ class HOOAN_Waitlist_Admin {
                 <tr>
                     <th scope="col" class="column-id">
                         <?php _e('ID', 'hookedonaneedle'); ?>
+                    </th>
+                    <th scope="col" class="column-name">
+                        <?php _e('Name', 'hookedonaneedle'); ?>
                     </th>
                     <th scope="col" class="column-email">
                         <?php _e('Email', 'hookedonaneedle'); ?>

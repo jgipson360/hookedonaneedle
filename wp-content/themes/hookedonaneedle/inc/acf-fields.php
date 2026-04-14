@@ -742,16 +742,13 @@ function hooan_get_homepage_defaults() {
             ),
         ),
         'explore_links' => array(
-            array('label' => 'Our Story', 'url' => '#'),
-            array('label' => 'The Process', 'url' => '#'),
-            array('label' => 'Care Instructions', 'url' => '#'),
-            array('label' => 'Blog', 'url' => '#'),
+            array('label' => 'Our Story', 'url' => home_url('/about')),
+            array('label' => 'Shop', 'url' => home_url('/shop')),
+            array('label' => 'Learn', 'url' => home_url('/learn')),
         ),
         'support_links' => array(
-            array('label' => 'Contact Us', 'url' => '#'),
-            array('label' => 'Shipping Policy', 'url' => '#'),
-            array('label' => 'Returns & Exchanges', 'url' => '#'),
-            array('label' => 'Privacy', 'url' => '#'),
+            array('label' => 'Custom Orders', 'url' => home_url('/custom-orders')),
+            array('label' => 'Social Hub', 'url' => home_url('/social')),
         ),
         'social_links' => array(
             array('icon' => 'instagram', 'url' => '#'),
@@ -1330,3 +1327,381 @@ function hooan_register_about_page_acf_fields() {
     ));
 }
 add_action('acf/init', 'hooan_register_about_page_acf_fields');
+
+/**
+ * Register Learn Page ACF Field Group
+ *
+ * Fields for the Learn page template (Hats for the Homeless), organized into tabs:
+ * Hero, Mission, Distribution, Narrative, Get Involved, Location
+ *
+ * @since 1.0.0
+ */
+function hooan_register_learn_page_acf_fields() {
+    if (!function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    acf_add_local_field_group(array(
+        'key' => 'group_learn_page_content',
+        'title' => 'Learn Page Content',
+        'fields' => array(
+            // ── HERO TAB ──
+            array(
+                'key' => 'field_learn_hero_tab',
+                'label' => 'Hero',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_learn_hero_label',
+                'label' => 'Hero Label',
+                'name' => 'learn_hero_label',
+                'type' => 'text',
+                'instructions' => 'Small label text above the headline.',
+                'default_value' => 'A Community Initiative',
+            ),
+            array(
+                'key' => 'field_learn_hero_heading',
+                'label' => 'Hero Heading',
+                'name' => 'learn_hero_heading',
+                'type' => 'textarea',
+                'instructions' => 'Headline text. Supports &lt;br&gt; and &lt;em&gt; HTML tags.',
+                'default_value' => 'Hats for the<br/><em>Homeless</em>',
+                'rows' => 2,
+            ),
+            array(
+                'key' => 'field_learn_hero_subtitle',
+                'label' => 'Hero Subtitle',
+                'name' => 'learn_hero_subtitle',
+                'type' => 'text',
+                'instructions' => 'Subtitle text below the headline.',
+                'default_value' => 'A Hooked on a Needle Community Initiative',
+            ),
+            array(
+                'key' => 'field_learn_hero_cta_text',
+                'label' => 'Hero CTA Text',
+                'name' => 'learn_hero_cta_text',
+                'type' => 'text',
+                'instructions' => 'Call-to-action button label.',
+                'default_value' => 'Explore Our Impact',
+            ),
+            array(
+                'key' => 'field_learn_hero_image',
+                'label' => 'Hero Background Image',
+                'name' => 'learn_hero_image',
+                'type' => 'image',
+                'instructions' => 'Full-width background image for the hero section.',
+                'return_format' => 'array',
+                'preview_size' => 'medium',
+                'library' => 'all',
+            ),
+
+            // ── MISSION TAB ──
+            array(
+                'key' => 'field_learn_mission_tab',
+                'label' => 'Mission',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_learn_mission_quote',
+                'label' => 'Mission Quote',
+                'name' => 'learn_mission_quote',
+                'type' => 'textarea',
+                'instructions' => 'Centered quote text. Supports &lt;em&gt; for emphasis.',
+                'default_value' => '"At Hooked on a Needle, crochet is more than craft — it\'s <em>a thread of hope.</em> Our mission is to weave compassion into every stitch, providing warmth and dignity to those who need it most."',
+                'rows' => 3,
+            ),
+
+            // ── DISTRIBUTION TAB ──
+            array(
+                'key' => 'field_learn_dist_tab',
+                'label' => 'Distribution',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_learn_dist_label',
+                'label' => 'Section Label',
+                'name' => 'learn_dist_label',
+                'type' => 'text',
+                'default_value' => 'Community Support',
+            ),
+            array(
+                'key' => 'field_learn_dist_heading',
+                'label' => 'Section Heading',
+                'name' => 'learn_dist_heading',
+                'type' => 'text',
+                'default_value' => 'What we distribute',
+            ),
+            array(
+                'key' => 'field_learn_dist_items',
+                'label' => 'Distribution Items',
+                'name' => 'learn_dist_items',
+                'type' => 'repeater',
+                'instructions' => 'Items distributed by the initiative. Each row: icon name, title, description.',
+                'min' => 0,
+                'max' => 8,
+                'layout' => 'block',
+                'button_label' => 'Add Item',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_learn_dist_item_icon',
+                        'label' => 'Icon',
+                        'name' => 'icon',
+                        'type' => 'text',
+                        'instructions' => 'Material Icons Outlined name (e.g., headset_off, front_hand).',
+                        'wrapper' => array('width' => '20'),
+                    ),
+                    array(
+                        'key' => 'field_learn_dist_item_title',
+                        'label' => 'Title',
+                        'name' => 'title',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '30'),
+                    ),
+                    array(
+                        'key' => 'field_learn_dist_item_desc',
+                        'label' => 'Description',
+                        'name' => 'desc',
+                        'type' => 'textarea',
+                        'rows' => 2,
+                        'wrapper' => array('width' => '50'),
+                    ),
+                ),
+            ),
+
+            // ── NARRATIVE TAB ──
+            array(
+                'key' => 'field_learn_narr_tab',
+                'label' => 'Narrative',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_learn_narr_heading',
+                'label' => 'Heading',
+                'name' => 'learn_narr_heading',
+                'type' => 'text',
+                'default_value' => 'Human connection in the heart of Fort Worth',
+            ),
+            array(
+                'key' => 'field_learn_narr_body_1',
+                'label' => 'Body Paragraph 1',
+                'name' => 'learn_narr_body_1',
+                'type' => 'textarea',
+                'instructions' => 'First body paragraph. Supports HTML.',
+                'default_value' => 'Since our inception, Hooked on a Needle has looked beyond the luxury of high-end fiber arts to address the raw realities of our local community. Based in Fort Worth, our philanthropy is centered on the belief that a handmade item carries a weight of care that a mass-produced product cannot.',
+                'rows' => 3,
+            ),
+            array(
+                'key' => 'field_learn_narr_body_2',
+                'label' => 'Body Paragraph 2',
+                'name' => 'learn_narr_body_2',
+                'type' => 'textarea',
+                'instructions' => 'Second body paragraph. Supports HTML.',
+                'default_value' => 'When we hand a hat to someone on the street, we aren\'t just giving them wool — we are giving them a piece of time, a symbol of dignity, and the knowledge that they are seen.',
+                'rows' => 3,
+            ),
+            array(
+                'key' => 'field_learn_narr_quote',
+                'label' => 'Pull Quote',
+                'name' => 'learn_narr_quote',
+                'type' => 'textarea',
+                'default_value' => '"Every stitch represents a moment where someone was thinking of their neighbor."',
+                'rows' => 2,
+            ),
+            array(
+                'key' => 'field_learn_narr_stat_num',
+                'label' => 'Stat Number',
+                'name' => 'learn_narr_stat_num',
+                'type' => 'text',
+                'instructions' => 'Large stat number on the badge (e.g., 5,000+).',
+                'default_value' => '5,000+',
+            ),
+            array(
+                'key' => 'field_learn_narr_stat_label',
+                'label' => 'Stat Label',
+                'name' => 'learn_narr_stat_label',
+                'type' => 'text',
+                'instructions' => 'Description below the stat number.',
+                'default_value' => 'Hats distributed across the Fort Worth community since 2021.',
+            ),
+            array(
+                'key' => 'field_learn_narr_image',
+                'label' => 'Narrative Image',
+                'name' => 'learn_narr_image',
+                'type' => 'image',
+                'instructions' => 'Image displayed beside the narrative text (recommended 4:5 aspect ratio).',
+                'return_format' => 'array',
+                'preview_size' => 'medium',
+                'library' => 'all',
+            ),
+
+            // ── GET INVOLVED TAB ──
+            array(
+                'key' => 'field_learn_involve_tab',
+                'label' => 'Get Involved',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_learn_involve_label',
+                'label' => 'Section Label',
+                'name' => 'learn_involve_label',
+                'type' => 'text',
+                'default_value' => 'Get Involved',
+            ),
+            array(
+                'key' => 'field_learn_involve_heading',
+                'label' => 'Section Heading',
+                'name' => 'learn_involve_heading',
+                'type' => 'text',
+                'default_value' => 'Ways to make a difference',
+            ),
+            array(
+                'key' => 'field_learn_involve_intro',
+                'label' => 'Intro Text',
+                'name' => 'learn_involve_intro',
+                'type' => 'textarea',
+                'default_value' => 'Whether you have five minutes, a stash of yarn, or a desire to give financially, there is a place for you here.',
+                'rows' => 2,
+            ),
+            array(
+                'key' => 'field_learn_involve_cards',
+                'label' => 'Involvement Cards',
+                'name' => 'learn_involve_cards',
+                'type' => 'repeater',
+                'instructions' => 'Cards for the involvement section. Toggle "Featured" for the highlighted card.',
+                'min' => 0,
+                'max' => 6,
+                'layout' => 'block',
+                'button_label' => 'Add Card',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_learn_involve_card_title',
+                        'label' => 'Title',
+                        'name' => 'title',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '25'),
+                    ),
+                    array(
+                        'key' => 'field_learn_involve_card_body',
+                        'label' => 'Body',
+                        'name' => 'body',
+                        'type' => 'textarea',
+                        'rows' => 2,
+                        'wrapper' => array('width' => '35'),
+                    ),
+                    array(
+                        'key' => 'field_learn_involve_card_link_text',
+                        'label' => 'Link Text',
+                        'name' => 'link_text',
+                        'type' => 'text',
+                        'wrapper' => array('width' => '15'),
+                    ),
+                    array(
+                        'key' => 'field_learn_involve_card_link_url',
+                        'label' => 'Link URL',
+                        'name' => 'link_url',
+                        'type' => 'url',
+                        'wrapper' => array('width' => '15'),
+                    ),
+                    array(
+                        'key' => 'field_learn_involve_card_featured',
+                        'label' => 'Featured',
+                        'name' => 'featured',
+                        'type' => 'true_false',
+                        'instructions' => 'Highlight this card.',
+                        'wrapper' => array('width' => '10'),
+                    ),
+                ),
+            ),
+
+            // ── LOCATION TAB ──
+            array(
+                'key' => 'field_learn_loc_tab',
+                'label' => 'Location',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+            ),
+            array(
+                'key' => 'field_learn_loc_heading',
+                'label' => 'Heading',
+                'name' => 'learn_loc_heading',
+                'type' => 'text',
+                'default_value' => 'Visit our workshop',
+            ),
+            array(
+                'key' => 'field_learn_loc_desc',
+                'label' => 'Description',
+                'name' => 'learn_loc_desc',
+                'type' => 'textarea',
+                'default_value' => 'Our Fort Worth creative studio doubles as our distribution hub. Join us for community stitch nights every Thursday.',
+                'rows' => 2,
+            ),
+            array(
+                'key' => 'field_learn_loc_address',
+                'label' => 'Map Address',
+                'name' => 'learn_loc_address',
+                'type' => 'text',
+                'instructions' => 'Address used for the embedded map. URL-encoded automatically.',
+                'default_value' => '402 Magnolia Avenue, Fort Worth, TX 76104',
+            ),
+            array(
+                'key' => 'field_learn_loc_details',
+                'label' => 'Location Details',
+                'name' => 'learn_loc_details',
+                'type' => 'repeater',
+                'instructions' => 'Detail rows displayed alongside the map.',
+                'min' => 0,
+                'max' => 4,
+                'layout' => 'table',
+                'button_label' => 'Add Detail',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_learn_loc_detail_icon',
+                        'label' => 'Icon',
+                        'name' => 'icon',
+                        'type' => 'text',
+                        'instructions' => 'Material Icons Outlined name.',
+                    ),
+                    array(
+                        'key' => 'field_learn_loc_detail_title',
+                        'label' => 'Title',
+                        'name' => 'title',
+                        'type' => 'text',
+                    ),
+                    array(
+                        'key' => 'field_learn_loc_detail_body',
+                        'label' => 'Body',
+                        'name' => 'body',
+                        'type' => 'text',
+                    ),
+                ),
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'page-learn.php',
+                ),
+            ),
+        ),
+        'menu_order' => 4,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'active' => true,
+    ));
+}
+add_action('acf/init', 'hooan_register_learn_page_acf_fields');

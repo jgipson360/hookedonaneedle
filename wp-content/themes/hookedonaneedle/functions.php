@@ -217,6 +217,27 @@ function hooan_waitlist_table_exists() {
 }
 
 /**
+ * Ensure the waitlist table has the `name` column (added in 1.1).
+ */
+function hooan_maybe_add_waitlist_name_column() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'waitlist_emails';
+
+    if (get_option('hooan_waitlist_schema_version', '1.0') === '1.1') {
+        return;
+    }
+
+    // Check if column already exists
+    $columns = $wpdb->get_col("DESCRIBE {$table_name}", 0);
+    if (!in_array('name', $columns, true)) {
+        $wpdb->query("ALTER TABLE {$table_name} ADD COLUMN name VARCHAR(255) NOT NULL DEFAULT '' AFTER id");
+    }
+
+    update_option('hooan_waitlist_schema_version', '1.1');
+}
+add_action('admin_init', 'hooan_maybe_add_waitlist_name_column');
+
+/**
  * Display admin notice if ACF is not active
  */
 function hooan_acf_admin_notice() {
@@ -355,6 +376,31 @@ function hooan_enqueue_about_assets() {
     }
 }
 add_action('wp_enqueue_scripts', 'hooan_enqueue_about_assets');
+
+/**
+ * Enqueue Learn page stylesheet and script
+ *
+ * Conditionally loads the learn CSS and JS only on the Learn page template.
+ */
+function hooan_enqueue_learn_assets() {
+    if (is_page_template('page-learn.php')) {
+        wp_enqueue_style(
+            'hooan-learn',
+            HOOAN_THEME_URI . '/assets/css/learn.css',
+            array('hooan-style'),
+            HOOAN_VERSION
+        );
+
+        wp_enqueue_script(
+            'hooan-learn',
+            HOOAN_THEME_URI . '/assets/js/learn.js',
+            array(),
+            HOOAN_VERSION,
+            true
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'hooan_enqueue_learn_assets');
 
 // Include waitlist admin
 if (file_exists(HOOAN_THEME_DIR . '/inc/waitlist-admin.php')) {
@@ -498,7 +544,8 @@ function hooan_ajax_submit_waitlist() {
 
     // Process the email
     $handler = new HOOAN_Waitlist_Handler();
-    $result = $handler->add_email($_POST['email']);
+    $name    = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
+    $result  = $handler->add_email($_POST['email'], $name);
 
     if ($result['success']) {
         wp_send_json_success(array(
@@ -512,6 +559,31 @@ function hooan_ajax_submit_waitlist() {
 }
 add_action('wp_ajax_submit_waitlist', 'hooan_ajax_submit_waitlist');
 add_action('wp_ajax_nopriv_submit_waitlist', 'hooan_ajax_submit_waitlist');
+
+/**
+ * Send email notification to admin when someone joins the waitlist.
+ *
+ * @param string $email Subscriber email.
+ * @param int    $id    Database row ID.
+ * @param string $name  Subscriber name.
+ */
+function hooan_waitlist_notify_admin($email, $id, $name = '') {
+    $admin_email = get_option('admin_email');
+    $site_name   = get_bloginfo('name');
+
+    $subject = sprintf(__('[%s] New Waitlist Signup', 'hookedonaneedle'), $site_name);
+
+    $message  = sprintf(__("New waitlist signup on %s:\n\n", 'hookedonaneedle'), $site_name);
+    if ($name) {
+        $message .= sprintf(__("Name: %s\n", 'hookedonaneedle'), $name);
+    }
+    $message .= sprintf(__("Email: %s\n", 'hookedonaneedle'), $email);
+    $message .= sprintf(__("Date: %s\n", 'hookedonaneedle'), current_time('mysql'));
+    $message .= sprintf(__("\nManage waitlist: %s\n", 'hookedonaneedle'), admin_url('options-general.php?page=hooan-waitlist'));
+
+    wp_mail($admin_email, $subject, $message);
+}
+add_action('hooan_waitlist_submitted', 'hooan_waitlist_notify_admin', 10, 3);
 /**
  * Custom Nav Walker for Desktop Navigation
  *

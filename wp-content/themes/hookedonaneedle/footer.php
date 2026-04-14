@@ -92,6 +92,8 @@ $copyright_text = hooan_get_field('copyright_text');
     </div>
 </footer>
 
+<?php get_template_part('template-parts/waitlist-modal'); ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>
