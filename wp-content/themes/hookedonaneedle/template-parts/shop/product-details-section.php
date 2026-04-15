@@ -21,9 +21,7 @@ $product_id = $product ? $product->get_id() : get_the_ID();
 
 $fiber_yarn = get_field('fiber_yarn_type', $product_id);
 $care = get_field('care_instructions', $product_id);
-$difficulty = get_field('difficulty_level', $product_id);
-
-if (!$fiber_yarn && !$care && !$difficulty) {
+if (!$fiber_yarn && !$care) {
     return;
 }
 ?>
@@ -41,12 +39,6 @@ if (!$fiber_yarn && !$care && !$difficulty) {
             <div class="flex gap-2">
                 <dt class="text-slate-500 dark:text-slate-400 w-32 flex-shrink-0">Care</dt>
                 <dd class="text-slate-700 dark:text-slate-300"><?php echo nl2br(esc_html($care)); ?></dd>
-            </div>
-        <?php endif; ?>
-        <?php if ($difficulty) : ?>
-            <div class="flex gap-2">
-                <dt class="text-slate-500 dark:text-slate-400 w-32 flex-shrink-0">Difficulty</dt>
-                <dd class="text-slate-700 dark:text-slate-300"><?php echo esc_html($difficulty); ?></dd>
             </div>
         <?php endif; ?>
     </dl>
