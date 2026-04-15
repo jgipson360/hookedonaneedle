@@ -59,7 +59,7 @@ $current_orderby = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby'
             <span class="text-slate-400">Sort:</span>
             <select name="orderby"
                     class="bg-transparent border-none focus:ring-0 cursor-pointer font-bold p-0 text-[11px] uppercase tracking-widest outline-none dark:text-slate-300"
-                    onchange="var url=new URL(window.location);url.searchParams.set('orderby',this.value);window.location.href=url.toString();">
+                    onchange="var p=new URLSearchParams(window.location.search);p.set('orderby',this.value);window.location.search=p.toString();">
                 <option value="date" <?php selected($current_orderby, 'date'); ?>>Latest Drops</option>
                 <option value="price" <?php selected($current_orderby, 'price'); ?>>Price: Low to High</option>
                 <option value="price-desc" <?php selected($current_orderby, 'price-desc'); ?>>Price: High to Low</option>
