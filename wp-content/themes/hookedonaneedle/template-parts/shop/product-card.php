@@ -36,28 +36,26 @@ $fiber_type = hooan_get_product_fiber_type($product_id);
     <div class="relative aspect-[4/5] overflow-hidden rounded-lg bg-secondary/30 dark:bg-slate-800 mb-5">
         <?php get_template_part('template-parts/shop/product-badge'); ?>
 
-        <img
-            src="<?php echo esc_url($thumbnail_url); ?>"
-            alt="<?php the_title_attribute(); ?>"
+        <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php the_title_attribute(); ?>"
             class="product-image w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-            <?php hooan_image_attrs(false); ?>
-        />
+            <?php hooan_image_attrs(false); ?> />
     </div>
 
     <!-- Product Info -->
-    <h3 class="font-display text-xl mb-1.5 group-hover:text-primary transition-colors text-slate-800 dark:text-slate-100">
+    <h3
+        class="font-display text-xl mb-1.5 group-hover:text-primary transition-colors text-slate-800 dark:text-slate-100">
         <?php the_title(); ?>
     </h3>
 
     <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-2 font-medium font-sans">
         <?php if ($category_name) : ?>
-            <span><?php echo esc_html($category_name); ?></span>
+        <span><?php echo esc_html($category_name); ?></span>
         <?php endif; ?>
         <?php if ($category_name && $fiber_type) : ?>
-            <span class="mx-1">&bull;</span>
+        <span class="mx-1">&bull;</span>
         <?php endif; ?>
         <?php if ($fiber_type) : ?>
-            <span><?php echo esc_html($fiber_type); ?></span>
+        <span><?php echo esc_html($fiber_type); ?></span>
         <?php endif; ?>
     </p>
 
