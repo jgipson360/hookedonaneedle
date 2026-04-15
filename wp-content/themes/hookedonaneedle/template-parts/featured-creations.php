@@ -34,7 +34,7 @@ $default_images = array(
                     <?php echo esc_html($section_subtitle); ?>
                 </p>
             </div>
-            <?php if ($lookbook_link) : ?>
+            <?php if (!empty($lookbook_link) && $lookbook_link !== '#') : ?>
             <a href="<?php echo esc_url($lookbook_link); ?>"
                 class="group flex items-center gap-2 text-primary font-bold">
                 <?php _e('View Lookbook', 'hookedonaneedle'); ?>
