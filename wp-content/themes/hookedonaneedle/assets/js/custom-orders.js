@@ -40,6 +40,11 @@
       );
     });
     progressFill.style.width = n * 33.33 + "%";
+
+    // Scroll to the top of the form section
+    if (header) {
+      header.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   pills.forEach(function (pill) {
