@@ -100,6 +100,38 @@ function hooan_render_header_cart() {
 add_action('hooan_header_cart', 'hooan_render_header_cart');
 
 /**
+ * Apply sort order from the toolbar dropdown
+ */
+function hooan_custom_catalog_ordering($args) {
+    if (!isset($_GET['orderby'])) {
+        return $args;
+    }
+
+    $orderby = sanitize_text_field(wp_unslash($_GET['orderby']));
+
+    switch ($orderby) {
+        case 'price':
+            $args['orderby']  = 'meta_value_num';
+            $args['order']    = 'ASC';
+            $args['meta_key'] = '_price';
+            break;
+        case 'price-desc':
+            $args['orderby']  = 'meta_value_num';
+            $args['order']    = 'DESC';
+            $args['meta_key'] = '_price';
+            break;
+        case 'date':
+        default:
+            $args['orderby'] = 'date';
+            $args['order']   = 'DESC';
+            break;
+    }
+
+    return $args;
+}
+add_filter('woocommerce_get_catalog_ordering_args', 'hooan_custom_catalog_ordering');
+
+/**
  * Modify products per page based on URL parameter
  */
 function hooan_shop_products_per_page($cols) {
