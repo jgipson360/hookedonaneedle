@@ -15,7 +15,6 @@ get_header();
 
 <main class="pt-24 pb-16 bg-background-light dark:bg-background-dark min-h-screen">
     <div class="max-w-7xl mx-auto px-6 py-16">
-        <?php do_action('hooan_breadcrumbs'); ?>
         <?php get_template_part('template-parts/shop/shop-hero'); ?>
 
         <div class="flex flex-col lg:flex-row gap-16">
