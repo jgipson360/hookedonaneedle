@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="400" height="100">
+  <defs>
+    <style>
+      .logo-text { font-family: 'Playfair Display', 'Brush Script MT', Georgia, serif; }
+      .logo-text-llc { font-family: 'Quicksand', 'Segoe UI', sans-serif; font-weight: 500; }
+    </style>
+  </defs>
+
+  <!-- Heart/Hook design on the left -->
+  <g transform="translate(0, 10)">
+    <!-- Crochet hook handle -->
+    <path d="M5 50 L30 50"
+          fill="none"
+          stroke="#C75B50"
+          stroke-width="3"
+          stroke-linecap="round"/>
+
+    <!-- Hook tip -->
+    <path d="M5 50 C2 50 0 48 0 45 L2 44"
+          fill="none"
+          stroke="#C75B50"
+          stroke-width="3"
+          stroke-linecap="round"/>
+
+    <!-- Heart shape flowing into H -->
+    <path d="M30 50
+             C32 46 36 42 36 36
+             C36 28 30 22 24 22
+             C18 22 14 28 14 34
+             C14 42 24 50 30 58
+             C36 50 46 42 46 34
+             C46 28 42 22 36 22
+             C32 22 30 26 30 30"
+          fill="none"
+          stroke="#C75B50"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- "Hooked On A" text - first line (dark for light backgrounds) -->
+  <text x="52" y="42" class="logo-text" font-size="32" font-style="italic" fill="#2B2523">
+    <tspan>Hooked On A</tspan>
+  </text>
+
+  <!-- "Needle" text - second line -->
+  <text x="100" y="78" class="logo-text" font-size="32" font-style="italic" fill="#2B2523">
+    <tspan>Needle</tspan>
+  </text>
+
+  <!-- "LLC" text -->
+  <text x="235" y="78" class="logo-text-llc" font-size="16" fill="#2B2523" letter-spacing="2">LLC</text>
+</svg>

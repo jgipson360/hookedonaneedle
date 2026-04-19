@@ -18,6 +18,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://lh3.googleusercontent.com">
     <link rel="preconnect" href="https://www.googletagmanager.com">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="<?php echo esc_url(HOOAN_THEME_URI . '/assets/images/favicon.svg'); ?>">
+    <link rel="apple-touch-icon" href="<?php echo esc_url(HOOAN_THEME_URI . '/assets/images/favicon.svg'); ?>">
     <?php wp_head(); ?>
 </head>
 <body <?php body_class('bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 font-sans transition-colors duration-300'); ?>>

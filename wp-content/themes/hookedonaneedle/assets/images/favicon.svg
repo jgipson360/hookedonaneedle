@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Dark rounded background -->
+  <rect x="14" y="14" width="40" height="42" rx="6" ry="6" fill="#2B2523"/>
+
+  <!-- Red heart loop (crochet hook forming heart) -->
+  <path d="M28 12
+           C22 12 16 18 16 26
+           C16 36 28 44 34 50
+           C34 50 34 42 34 38
+           C34 34 30 32 28 34
+           C26 36 26 40 28 42"
+        fill="none"
+        stroke="#D4574B"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Upper right of heart -->
+  <path d="M34 50
+           C40 44 52 36 52 26
+           C52 18 46 12 40 12
+           C36 12 34 16 34 20"
+        fill="none"
+        stroke="#D4574B"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Cream H letter -->
+  <text x="32" y="46"
+        font-family="Brush Script MT, Segoe Script, cursive"
+        font-size="32"
+        font-style="italic"
+        fill="#F5E6D3"
+        text-anchor="middle">H</text>
+</svg>
